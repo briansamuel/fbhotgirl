@@ -15,6 +15,7 @@ class CreatePostMetaTable extends Migration
     {
         Schema::create('post_meta', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('post_id');
             $table->string('meta_key');
             $table->text('meta_value');
         });
