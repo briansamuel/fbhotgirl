@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Log;
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
@@ -33,10 +34,14 @@ class Authenticate
      * @param  string|null  $guard
      * @return mixed
      */
+
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
+        Log::info('Log request', ['uri' => $request->path(), 'params' => $request->all()]);
+        $request_ip = $request->getClientIp();
+        $white_list_ip = explode(',', env('WHITE_LIST_IP'));
+        if (! in_array($request_ip, $white_list_ip)) {
+            //return response()->json(['error' => ['code' => 403, 'message' => '403 Forbidden! denied from ip '.$request_ip]], 403);
         }
 
         return $next($request);

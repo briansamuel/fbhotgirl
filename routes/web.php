@@ -14,3 +14,10 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['middleware' => 'auth'], function () use ($router) {
+    $router->get('/', function ()    {
+        echo "hi";
+    });
+
+});
