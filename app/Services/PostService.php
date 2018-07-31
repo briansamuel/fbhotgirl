@@ -35,7 +35,6 @@ class PostService
 		$update['post_author'] = $params['post_author']; 
 		$update['post_status'] = $params['post_status']; 
 		$update['post_type'] = $params['post_type']; 
-		$update['created_at'] = date("Y-m-d H:i:s"); 
 		$update['updated_at'] = date("Y-m-d H:i:s"); 
 
 		return PostModel::update($id, $update);		

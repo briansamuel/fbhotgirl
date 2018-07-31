@@ -44,7 +44,45 @@ class ValidationService
                 'post_author' => self::getRule('require_field'),
                 'post_status' => self::getRule('require_field'),
                 'post_type' => self::getRule('require_field')
-            ]
+            ],
+            'insert_taxonomy_fields' => [
+                'taxonomy_name' => self::getRule('require_field'),
+                'taxonomy_parent' => self::getRule('require_field'),
+                'taxonomy_type' => self::getRule('require_field'),
+            ],
+            'update_taxonomy_fields' => [
+                'taxonomy_name' => self::getRule('require_field'),
+                'taxonomy_parent' => self::getRule('require_field'),
+                'taxonomy_type' => self::getRule('require_field')
+            ],
+            'insert_taxonomy_relation_fields' => [
+                'term_id' => self::getRule('mid'),
+                'post_id' => self::getRule('mid')
+            ],
+            'update_taxonomy_relation_fields' => [
+                'term_id' => self::getRule('mid'),
+                'post_id' => self::getRule('mid')
+            ],
+            'insert_post_meta_fields' => [
+                'post_id' => self::getRule('mid'),
+                'meta_key' => self::getRule('require_field'),
+                'meta_value' => self::getRule('require_field')
+            ],
+            'update_post_meta_fields' => [
+                'post_id' => self::getRule('mid'),
+                'meta_key' => self::getRule('require_field'),
+                'meta_value' => self::getRule('require_field')
+            ],
+            'insert_options_fields' => [
+                'id_option' => self::getRule('mid'),
+                'meta_key' => self::getRule('require_field'),
+                'meta_value' => self::getRule('require_field')
+            ],
+            'update_options_fields' => [
+                'id_option' => self::getRule('mid'),
+                'meta_key' => self::getRule('require_field'),
+                'meta_value' => self::getRule('require_field')
+            ],
         ];
 
         return isset($rules[$type]) ? $rules[$type] : array();
