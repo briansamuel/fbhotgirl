@@ -35,9 +35,51 @@ class PostController extends Controller
             return response()->json($result, 400);
         }
 
-        $add = $this->postService->insert($params);
         try {
             $add = $this->postService->insert($params);
+            $result['success'] = true;
+        } catch(InternalErrorException $e) {
+            return response()->json(Message::get(500), 500);
+        }
+        
+        return response()->json($result, 200);
+    }
+
+    public function edit($id)
+    {
+        if(!$id){
+            $result['status'] = false;
+            $result['msg'] = "Tham số truyền vào không hợp lệ";
+            return response()->json($result, 400);
+        }
+        $params = $this->request->only(['post_title', 'post_description', 'post_content', 'post_keyword', 'post_thumbnail', 'post_author', 'post_status', 'post_type']);
+        $validator = $this->validator->make($params, 'edit_post_fields');
+        if($validator->fails()){
+            $result['status'] = false;
+            $result['msg'] = $validator->errors()->all();
+            return response()->json($result, 400);
+        }
+
+        try {
+            $update = $this->postService->update($id, $params);
+            $result['success'] = true;
+        } catch(InternalErrorException $e) {
+            return response()->json(Message::get(500), 500);
+        }
+        
+        return response()->json($result, 200);
+    }
+
+    public function delete($id)
+    {
+        if(!$id){
+            $result['status'] = false;
+            $result['msg'] = "Tham số truyền vào không hợp lệ";
+            return response()->json($result, 400);
+        }
+
+        try {
+            $this->postService->delete($id);
             $result['success'] = true;
         } catch(InternalErrorException $e) {
             return response()->json(Message::get(500), 500);

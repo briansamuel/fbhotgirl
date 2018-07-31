@@ -35,6 +35,16 @@ class ValidationService
                 'post_status' => self::getRule('require_field'),
                 'post_type' => self::getRule('require_field')
             ],
+            'update_post_fields' => [
+                'post_title' => self::getRule('require_field'),
+                'post_description' => self::getRule('require_field'),
+                'post_content' => self::getRule('require_field'),
+                'post_keyword' => self::getRule('require_field'),
+                'post_thumbnail' => self::getRule('require_field'),
+                'post_author' => self::getRule('require_field'),
+                'post_status' => self::getRule('require_field'),
+                'post_type' => self::getRule('require_field')
+            ]
         ];
 
         return isset($rules[$type]) ? $rules[$type] : array();

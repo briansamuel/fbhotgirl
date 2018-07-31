@@ -21,4 +21,6 @@ $router->group(['middleware' => 'auth', 'namespace' => 'V1'], function () use ($
         echo "list post nè";
     });
     $router->post('post', 'PostController@add');
+    $router->post('post/{id}', 'PostController@edit');
+    $router->delete('post/{id}', 'PostController@delete');
 });

@@ -23,4 +23,16 @@ class PostModel
         return $insert;
     }
 
+    public static function update($id, $params)
+    {
+        $update = DB::table(self::$table)->where('id', $id)->update($params);
+        return $update;
+    }
+
+    public static function delete($id)
+    {
+        $delete = DB::table(self::$table)->where('id', $id)->delete();
+        return $delete;
+    }
+
 }
