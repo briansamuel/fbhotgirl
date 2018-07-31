@@ -16,9 +16,9 @@ $router->get('/', function () use ($router) {
     //Test
 });
 
-$router->group(['middleware' => 'auth'], function () use ($router) {
-    $router->get('/', function ()    {
-        echo "hi";
+$router->group(['middleware' => 'auth', 'namespace' => 'V1'], function () use ($router) {
+    $router->get('post', function ()    {
+        echo "list post nè";
     });
-
+    $router->post('post', 'PostController@add');
 });

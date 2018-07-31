@@ -38,11 +38,6 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         Log::info('Log request', ['uri' => $request->path(), 'params' => $request->all()]);
-        $request_ip = $request->getClientIp();
-        $white_list_ip = explode(',', env('WHITE_LIST_IP'));
-        if (! in_array($request_ip, $white_list_ip)) {
-            //return response()->json(['error' => ['code' => 403, 'message' => '403 Forbidden! denied from ip '.$request_ip]], 403);
-        }
 
         return $next($request);
     }
