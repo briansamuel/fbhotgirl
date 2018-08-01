@@ -19,6 +19,7 @@ $router->get('/', function () use ($router) {
 $router->group(['middleware' => 'auth', 'namespace' => 'V1'], function () use ($router) {
 	// post
 	$router->group(['prefix' => 'post'], function () use ($router) {
+	    $router->get('', 'PostController@index');
 	    $router->post('', 'PostController@add');
 	    $router->post('/{id}', 'PostController@edit');
 	    $router->delete('/{id}', 'PostController@delete');

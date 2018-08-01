@@ -6,6 +6,17 @@ use App\Transformers\AgencyTransformer;
 
 class PostService
 {
+	public function getMany($limit, $offset)
+	{
+		$result = PostModel::getMany($limit, $offset);
+        return $result ? $result : [];
+	}
+
+	public function findByKey($key, $value)
+	{
+        $result = PostModel::findByKey($key, $value);
+        return $result ? $result : [];
+	}
 
 	public function insert($params)
 	{

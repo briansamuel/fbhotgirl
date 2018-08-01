@@ -10,6 +10,11 @@ class PostModel
     /**
      *
      */
+    public static function getMany($limit, $offset)
+    {
+        return DB::table(self::$table)->skip($offset)->take($limit)->where('post_status', 'publish')->get();
+    }
+
     public static function findByKey($key, $value, $columns = ['*'], $with = [])
     {
         $data = DB::table(self::$table)->select($columns)->where($key, $value)->first();
