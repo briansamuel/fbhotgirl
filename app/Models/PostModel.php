@@ -10,9 +10,16 @@ class PostModel
     /**
      *
      */
-    public static function getMany($limit, $offset)
+    public static function getMany($limit, $offset, $filter)
     {
-        return DB::table(self::$table)->skip($offset)->take($limit)->where('post_status', 'publish')->get();
+        $query = DB::table(self::$table)->skip($offset)->take($limit);
+        if(isset($filter['keyword']) && $filter['keyword'] != ""){
+            $query->where('post_keyword', 'like', "%$filter[keyword]%");
+        }
+        if(isset($filter['author']) && $filter['author'] != ""){
+            $query->where('post_author', '=', $filter['author']);
+        }
+        return $query->get();
     }
 
     public static function findByKey($key, $value, $columns = ['*'], $with = [])

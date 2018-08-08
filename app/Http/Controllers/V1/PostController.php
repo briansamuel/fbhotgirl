@@ -27,11 +27,14 @@ class PostController extends Controller
 
     public function index()
     {
-        $params = $this->request->only(['limit', 'offset']);
+        $params = $this->request->only(['limit', 'offset', 'category', 'keyword', 'author']);
         $params['limit'] = (isset($params['limit']) && is_numeric($params['limit'])) ? $params['limit'] : 10;
         $params['offset'] = (isset($params['offset']) && is_numeric($params['offset'])) ? $params['offset'] : 0;
-        $data = $this->postService->getMany($params['limit'], $params['offset']);
-        return response()->json(['data' => $data]);
+
+        $result = $this->postService->getMany($params['limit'], $params['offset'], $params);
+        $data['data'] = $result;
+        $data['total'] = count($result);
+        return response()->json($data);
     }
 
     public function add()

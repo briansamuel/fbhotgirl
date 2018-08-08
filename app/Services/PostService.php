@@ -6,9 +6,9 @@ use App\Transformers\AgencyTransformer;
 
 class PostService
 {
-	public function getMany($limit, $offset)
+	public function getMany($limit, $offset, $filter)
 	{
-		$result = PostModel::getMany($limit, $offset);
+		$result = PostModel::getMany($limit, $offset, $filter);
         return $result ? $result : [];
 	}
 
